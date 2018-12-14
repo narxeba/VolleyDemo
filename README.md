@@ -27,4 +27,4 @@ Volley có các điểm nổi bật dưới đây:
 
 Ngoài ra chúng ta có thể tạo custom request. 
 
-Chi tiết bài viết <a href="http://2dev4u.com/android/huong-dan-su-dung-thu-vien-volley-trong-android.html">Hướng dẫn sử dụng Volley parse json</a>
+Chi tiết bài viết <a href="http://ntcde.com/android/huong-dan-su-dung-thu-vien-volley-trong-android.html">Hướng dẫn sử dụng Volley parse json</a>
