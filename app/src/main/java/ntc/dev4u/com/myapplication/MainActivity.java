@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -24,12 +25,13 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+    private TextView mResponsive;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mResponsive = (TextView) findViewById(R.id.response);
 
         Map<String, String> postParam= new HashMap<String, String>();
         postParam.put("login_id", "chungtv");
@@ -44,14 +46,22 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d(TAG, "JsonObjectRequest onResponse: " + response.toString());
+                        mResponsive.setText(response.toString());
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "JsonObjectRequest onErrorResponse: " + error.getMessage());
             }
-        });
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                headers.put("accept", "application/json;charset=UTF-8");
+                return super.getHeaders();
+            }
+        };
         VolleySingleton.getInstance(this).getRequestQueue().add(jsonObjectRequest);
     }
 
